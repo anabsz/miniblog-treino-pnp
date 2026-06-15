@@ -1,33 +1,42 @@
 import { BrInput, BrButton } from "@govbr-ds/react-components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import type { iRegisterForm } from "../interfaces/iRegisterForm";
+import { registerService } from "../services/registerService";
+import axios from "axios";
+import { schema } from "./schema";
 
 export default function RegisterForm() {
-	const schema = yup.object().shape({
-		name: yup.string().required("O nome é obrigatório"),
-		username: yup.string().required("O nome de usuário é obrigatório"),
-		password: yup
-			.string()
-			.min(6, "A senha deve conter no mínimo 6 caracteres")
-			.required("A senha é obrigatória"),
-		passwordConfirm: yup
-			.string()
-			.oneOf([yup.ref("password"), undefined], "As senhas não coincidem")
-			.required("A confirmação da senha é obrigatória"),
-	});
-
 	const {
 		register,
 		handleSubmit,
+		setError,
 		formState: { errors },
-	} = useForm({
+	} = useForm<iRegisterForm>({
 		resolver: yupResolver(schema),
 	});
 
-	function handleData(data: iRegisterForm) {
-		console.log(data);
+	async function handleData(data: iRegisterForm) {
+		try {
+			const registerData = {
+				username: data.username,
+				nome: data.name,
+				senha: data.password,
+			};
+			const response = await registerService(registerData);
+			return response;
+		} catch (error) {
+			if (axios.isAxiosError(error) && error.response) {
+				if (error.response.status === 400 && error.response.data.username) {
+					setError("username", {
+						type: "server",
+						message:
+							error.response.data.username[0] ??
+							"O nome de usuário já está em uso",
+					});
+				}
+			}
+		}
 	}
 
 	return (
