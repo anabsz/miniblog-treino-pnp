@@ -5,8 +5,21 @@ import type { iRegisterForm } from "../interfaces/iRegisterForm";
 import { registerService } from "../services/registerService";
 import axios from "axios";
 import { schema } from "./schema";
+import { useState } from "react";
+import type { iRegisterFormProps } from "../interfaces/iRegisterFormProps";
 
-export default function RegisterForm() {
+export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
+	const [showPassword, setShowPassword] = useState(false);
+	const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+	function togglePassword() {
+		setShowPassword((prev) => !prev);
+	}
+
+	function togglePasswordConfirm() {
+		setShowPasswordConfirm((prev) => !prev);
+	}
+
 	const {
 		register,
 		handleSubmit,
@@ -24,6 +37,7 @@ export default function RegisterForm() {
 				senha: data.password,
 			};
 			const response = await registerService(registerData);
+			onSuccess();
 			return response;
 		} catch (error) {
 			if (axios.isAxiosError(error) && error.response) {
@@ -40,7 +54,10 @@ export default function RegisterForm() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(handleData)}>
+		<form
+			onSubmit={handleSubmit(handleData)}
+			className="d-flex flex-col gap-4"
+		>
 			<BrInput
 				label="Nome de Usuário"
 				{...register("username")}
@@ -55,18 +72,30 @@ export default function RegisterForm() {
 			/>
 			<BrInput
 				label="Senha"
-				type="password"
+				type={showPassword ? "text" : "password"}
 				{...register("password")}
 				status={errors.password ? "danger" : undefined}
 				feedbackText={errors.password?.message}
-			/>
+			>
+				<BrButton
+					icon={showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}
+					onClick={togglePassword}
+				/>
+			</BrInput>
 			<BrInput
 				label="Confirmar Senha"
-				type="password"
+				type={showPasswordConfirm ? "text" : "password"}
 				{...register("passwordConfirm")}
 				status={errors.passwordConfirm ? "danger" : undefined}
 				feedbackText={errors.passwordConfirm?.message}
-			/>
+			>
+				<BrButton
+					icon={
+						showPasswordConfirm ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"
+					}
+					onClick={togglePasswordConfirm}
+				/>
+			</BrInput>
 			<div className="d-flex">
 				<BrButton
 					primary
