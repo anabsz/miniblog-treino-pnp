@@ -7,7 +7,7 @@ export default function AutocadastroPage() {
 
 	return (
 		<div className="d-flex flex-col items-center justify-center min-h-screen">
-			<div className="d-flex flex-col gap-2 px-4 py-8 bg-pure-0 shadow-xl">
+			<div className="w-lg d-flex flex-col gap-2 px-4 py-8 bg-pure-0 shadow-xl">
 				<h1 className="text-center">AUTOCADASTRO</h1>
 				{success && (
 					<BrMessage
@@ -17,7 +17,6 @@ export default function AutocadastroPage() {
 						closable
 					/>
 				)}
-
 				<RegisterForm onSuccess={() => setSuccess(true)} />
 			</div>
 		</div>
