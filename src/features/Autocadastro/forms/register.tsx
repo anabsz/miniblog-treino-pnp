@@ -11,6 +11,7 @@ import type { iRegisterFormProps } from "../interfaces/iRegisterFormProps";
 export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	function togglePassword() {
 		setShowPassword((prev) => !prev);
@@ -30,6 +31,12 @@ export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
 	});
 
 	async function handleData(data: iRegisterForm) {
+		setLoading(true);
+
+		const delay = (ms: number) =>
+			new Promise((resolve) => setTimeout(resolve, ms));
+		await delay(2000); // Simula um atraso de 2 segundos
+
 		try {
 			const registerData = {
 				username: data.username,
@@ -50,6 +57,8 @@ export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
 					});
 				}
 			}
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -96,13 +105,14 @@ export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
 					onClick={togglePasswordConfirm}
 				/>
 			</BrInput>
-			<div className="d-flex">
+			<div>
 				<BrButton
 					primary
 					type="submit"
 					className="w-full! mx-auto"
+					disabled={loading}
 				>
-					Registrar
+					{loading ? "Cadastrando..." : "Cadastrar"}
 				</BrButton>
 			</div>
 		</form>
