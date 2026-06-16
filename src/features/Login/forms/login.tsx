@@ -4,8 +4,10 @@ import type { iLoginForm } from "../interfaces/iLoginForm";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
+import { useAuthState } from "../../../states/useAuthStates";
+import { loginService } from "../services/loginService";
 
-export default function LoginForm() {
+export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 	const [loading, setLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -29,7 +31,12 @@ export default function LoginForm() {
 		await delay(2000); // Simula um atraso de 2 segundos
 
 		try {
-			console.log("Dados do formulário:", data);
+			const auth = loginService(data);
+			auth.then((response) => {
+				const { access, refresh } = response;
+				useAuthState.getState().login(access, refresh);
+				onSuccess();
+			});
 		} catch (error) {
 			console.error("Erro ao processar o login:", error);
 		} finally {
