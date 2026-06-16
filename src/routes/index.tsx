@@ -5,10 +5,12 @@ import ProtectedRoute from "./protectedRoute";
 
 export const router = createBrowserRouter([
 	{
-		children: publicRoutes,
-	},
-	{
-		children: protectedRoutes,
-		element: <ProtectedRoute />,
+		children: [
+			...publicRoutes,
+			{
+				children: protectedRoutes,
+				element: <ProtectedRoute />,
+			},
+		],
 	},
 ]);
