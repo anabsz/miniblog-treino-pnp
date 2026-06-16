@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import LoginForm from "./forms/login";
 
 export default function LoginPage() {
@@ -9,10 +9,19 @@ export default function LoginPage() {
 	}
 
 	return (
-		<div className="container d-flex flex-col items-center justify-center min-h-screen">
+		<div className="d-flex flex-col items-center justify-center min-h-screen">
 			<div className="w-lg d-flex flex-col gap-2 px-4 py-8 bg-pure-0 shadow-xl">
-				<h1>Login</h1>
+				<h1 className="text-center">Entrar</h1>
 				<LoginForm onSuccess={handleOnSuccess} />
+				<div className="d-flex flex-col align-items-center">
+					<p className="text-lg">Não possui cadastro?</p>
+					<Link
+						to="/cadastro"
+						className="text-lg"
+					>
+						Cadastrar-se
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
