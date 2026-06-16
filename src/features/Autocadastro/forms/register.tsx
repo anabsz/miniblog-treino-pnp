@@ -33,10 +33,6 @@ export default function RegisterForm({ onSuccess }: iRegisterFormProps) {
 	async function handleData(data: iRegisterForm) {
 		setLoading(true);
 
-		const delay = (ms: number) =>
-			new Promise((resolve) => setTimeout(resolve, ms));
-		await delay(2000); // Simula um atraso de 2 segundos
-
 		try {
 			const registerData = {
 				username: data.username,

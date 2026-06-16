@@ -6,8 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import { useAuthState } from "../../../states/useAuthStates";
 import { loginService } from "../services/loginService";
+import axios from "axios";
+import type iLoginFormProps from "../interfaces/iLoginFormProps";
 
-export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+export default function LoginForm({ onSuccess, onError }: iLoginFormProps) {
 	const [loading, setLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -26,19 +28,17 @@ export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 	async function handleData(data: iLoginForm) {
 		setLoading(true);
 
-		const delay = (ms: number) =>
-			new Promise((resolve) => setTimeout(resolve, ms));
-		await delay(2000); // Simula um atraso de 2 segundos
-
 		try {
-			const auth = loginService(data);
-			auth.then((response) => {
-				const { access, refresh } = response;
-				useAuthState.getState().login(access, refresh);
-				onSuccess();
-			});
-		} catch (error) {
-			console.error("Erro ao processar o login:", error);
+			const response = await loginService(data);
+			const { access, refresh } = response;
+			useAuthState.getState().login(access, refresh);
+			onSuccess();
+		} catch (error: unknown) {
+			if (axios.isAxiosError(error) && error.response) {
+				if (error.response.status === 401) {
+					onError("Credenciais inválidas. Por favor, tente novamente.");
+				}
+			}
 		} finally {
 			setLoading(false);
 		}
