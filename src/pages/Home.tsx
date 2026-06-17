@@ -1,3 +1,9 @@
+import VisualizarPosts from "../features/VisualizarPosts";
+
 export default function HomePage() {
-	return <h1>Home</h1>;
+	return (
+		<div className="py-4">
+			<VisualizarPosts />
+		</div>
+	);
 }
