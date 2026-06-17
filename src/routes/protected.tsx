@@ -1,4 +1,4 @@
-import HomePage from "../features/Home";
+import HomePage from "../pages/Home";
 import Layout from "../pages/layout";
 
 export const protectedRoutes = [
