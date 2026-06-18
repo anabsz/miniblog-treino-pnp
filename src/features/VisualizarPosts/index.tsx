@@ -4,6 +4,7 @@ import postService from "../../services/models/postService";
 
 export default function VisualizarPosts() {
 	const [posts, setPosts] = useState<iPost[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	function formatDate(date: string): string {
 		return new Date(date).toLocaleString("pt-BR", {
@@ -14,6 +15,7 @@ export default function VisualizarPosts() {
 			minute: "2-digit",
 		});
 	}
+
 	useEffect(() => {
 		async function getPosts() {
 			try {
@@ -21,11 +23,39 @@ export default function VisualizarPosts() {
 				setPosts(response.results);
 			} catch (error) {
 				console.error("Erro ao buscar posts:", error);
+			} finally {
+				setLoading(false);
 			}
 		}
-
 		getPosts();
 	}, []);
+
+	function PostSkeleton() {
+		return (
+			<div className="br-card p-4">
+				<div className="w-full h-48 bg-gray-200 animate-pulse rounded" />
+
+				<div className="mt-4 h-8 bg-gray-200 animate-pulse rounded" />
+
+				<div className="mt-2 h-4 bg-gray-200 animate-pulse rounded" />
+				<div className="mt-2 h-4 bg-gray-200 animate-pulse rounded" />
+				<div className="mt-2 h-4 bg-gray-200 animate-pulse rounded w-3/4" />
+
+				<div className="mt-4 h-3 bg-gray-200 animate-pulse rounded w-1/2" />
+				<div className="mt-2 h-3 bg-gray-200 animate-pulse rounded w-1/3" />
+			</div>
+		);
+	}
+
+	if (loading) {
+		return (
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{Array.from({ length: 6 }).map((_, index) => (
+					<PostSkeleton key={index} />
+				))}
+			</div>
+		);
+	}
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4 hover:cursor-pointer ">
