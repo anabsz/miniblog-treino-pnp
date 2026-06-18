@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import type { iPublicacaoForm } from "../interfaces/iPublicacaoForm";
+import publicacaoService from "../../../services/models/publicacaoService";
 
 export default function Register() {
 	const {
@@ -18,11 +19,18 @@ export default function Register() {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
-	function handleData(data: iPublicacaoForm) {
-		const imagem = data.imagem?.[0];
-
-		console.log(imagem);
-		console.log(data);
+	async function handleData(data: iPublicacaoForm) {
+		try {
+			const payload = {
+				titulo: data.titulo,
+				descricao: data.descricao,
+				imagem: data.imagem ? data.imagem[0] : undefined,
+			};
+			const response = await publicacaoService.post(payload);
+			console.log("Publicação criada com sucesso:", response);
+		} catch (error) {
+			console.error("Erro ao processar o formulário:", error);
+		}
 	}
 	return (
 		<form

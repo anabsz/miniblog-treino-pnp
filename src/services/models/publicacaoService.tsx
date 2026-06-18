@@ -1,4 +1,4 @@
-import type iPublicacao from "../../interfaces/iPublicacao";
+import type iPublicacaoPost from "../../interfaces/iPublicacaoPosty";
 import { microblogApi } from "../commom/microblogApi";
 
 export default class publicacaoService {
@@ -7,7 +7,7 @@ export default class publicacaoService {
 		return response.data;
 	}
 
-	static async post(data: iPublicacao) {
+	static async post(data: iPublicacaoPost) {
 		const response = await microblogApi.post("/publicacao/", data);
 		return response.data;
 	}

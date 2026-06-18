@@ -16,6 +16,7 @@ export default function HomePage() {
 	return (
 		<div className="py-4">
 			<BrModal
+				width="600px"
 				isOpen={isModalOpen}
 				title="Título do Modal"
 				onClose={closeModal}
