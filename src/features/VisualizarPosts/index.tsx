@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type iPost from "../../interfaces/iPost";
-import postService from "../../services/models/postService";
+import publicacaoService from "../../services/models/publicacaoService";
+import type iPublicacao from "../../interfaces/iPublicacao";
 
 export default function VisualizarPosts() {
-	const [posts, setPosts] = useState<iPost[]>([]);
+	const [posts, setPosts] = useState<iPublicacao[]>([]);
 	const [loading, setLoading] = useState(true);
 
 	function formatDate(date: string): string {
@@ -19,7 +19,7 @@ export default function VisualizarPosts() {
 	useEffect(() => {
 		async function getPosts() {
 			try {
-				const response = await postService.get();
+				const response = await publicacaoService.get();
 				setPosts(response.results);
 			} catch (error) {
 				console.error("Erro ao buscar posts:", error);
