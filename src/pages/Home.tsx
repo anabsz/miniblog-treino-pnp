@@ -2,15 +2,22 @@ import { BrButton, BrModal } from "@govbr-ds/react-components";
 import VisualizarPosts from "../features/VisualizarPosts";
 import { useState } from "react";
 import CriarPublicacao from "../features/CriarPublicacao";
+import type iPublicacao from "../interfaces/iPublicacao";
 
 export default function HomePage() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
-	function openModal() {
+	const openModal = () => {
 		setIsModalOpen(true);
-	}
-	function closeModal() {
+	};
+
+	const closeModal = () => {
 		setIsModalOpen(false);
+	};
+
+	async function handleSuccess(publicacao: iPublicacao) {
+		closeModal();
+		console.log("Publicação criada com sucesso:", publicacao);
 	}
 
 	return (
@@ -22,7 +29,7 @@ export default function HomePage() {
 				onClose={closeModal}
 				showClose
 			>
-				<CriarPublicacao />
+				<CriarPublicacao onSuccess={handleSuccess} />
 			</BrModal>
 			<BrButton
 				onClick={openModal}

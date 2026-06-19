@@ -8,9 +8,11 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import type { iPublicacaoForm } from "../interfaces/iPublicacaoForm";
-import publicacaoService from "../../../services/models/publicacaoService";
+import publicacaoService from "../../../services/models/PublicacaoService";
+import type { IRegisterProps } from "../interfaces/iRegisterProps";
+import type iPublicacaoSubmit from "../../../interfaces/iPublicacaoSubmit";
 
-export default function Register() {
+export default function Register(iRegisterProps: IRegisterProps) {
 	const {
 		register,
 		control,
@@ -19,19 +21,21 @@ export default function Register() {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
+
 	async function handleData(data: iPublicacaoForm) {
 		try {
-			const payload = {
+			const payload: iPublicacaoSubmit = {
 				titulo: data.titulo,
 				descricao: data.descricao,
 				imagem: data.imagem ? data.imagem[0] : undefined,
 			};
 			const response = await publicacaoService.post(payload);
-			console.log("Publicação criada com sucesso:", response);
+			iRegisterProps.onSuccess(response);
 		} catch (error) {
 			console.error("Erro ao processar o formulário:", error);
 		}
 	}
+
 	return (
 		<form
 			onSubmit={handleSubmit(handleData)}

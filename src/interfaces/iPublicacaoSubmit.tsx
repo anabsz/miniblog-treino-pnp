@@ -1,4 +1,4 @@
-export default interface iPublicacaoPost {
+export default interface iPublicacaoSubmit {
 	titulo: string;
 	descricao: string;
 	imagem?: File;

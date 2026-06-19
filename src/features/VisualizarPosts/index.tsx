@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import publicacaoService from "../../services/models/publicacaoService";
 import type iPublicacao from "../../interfaces/iPublicacao";
+import PublicacaoService from "../../services/models/PublicacaoService.tsx";
 
 export default function VisualizarPosts() {
 	const [posts, setPosts] = useState<iPublicacao[]>([]);
@@ -19,7 +19,7 @@ export default function VisualizarPosts() {
 	useEffect(() => {
 		async function getPosts() {
 			try {
-				const response = await publicacaoService.get();
+				const response = await PublicacaoService.get();
 				setPosts(response.results);
 			} catch (error) {
 				console.error("Erro ao buscar posts:", error);
