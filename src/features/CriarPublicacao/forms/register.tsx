@@ -11,6 +11,7 @@ import type { iPublicacaoForm } from "../interfaces/iPublicacaoForm";
 import publicacaoService from "../../../services/models/PublicacaoService";
 import type { IRegisterProps } from "../interfaces/iRegisterProps";
 import type iPublicacaoSubmit from "../../../interfaces/iPublicacaoSubmit";
+import axios from "axios";
 
 export default function Register(iRegisterProps: IRegisterProps) {
 	const {
@@ -31,8 +32,14 @@ export default function Register(iRegisterProps: IRegisterProps) {
 			};
 			const response = await publicacaoService.post(payload);
 			iRegisterProps.onSuccess(response);
-		} catch (error) {
-			console.error("Erro ao processar o formulário:", error);
+		} catch (error: unknown) {
+			if (axios.isAxiosError(error) && error.response) {
+				const errorMessage =
+					error.response.data?.message || "Erro ao criar publicação!";
+				iRegisterProps.onError(errorMessage);
+			} else {
+				iRegisterProps.onError("Erro ao criar publicação!");
+			}
 		}
 	}
 
@@ -47,7 +54,6 @@ export default function Register(iRegisterProps: IRegisterProps) {
 				{...register("titulo")}
 				status={errors.titulo ? "danger" : undefined}
 				feedbackText={errors.titulo?.message}
-				required
 			/>
 			<BrTextarea
 				label="Conteúdo da Publicação"
