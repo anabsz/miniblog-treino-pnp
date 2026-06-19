@@ -12,8 +12,11 @@ import publicacaoService from "../../../services/models/PublicacaoService";
 import type { IRegisterProps } from "../interfaces/iRegisterProps";
 import type iPublicacaoSubmit from "../../../interfaces/iPublicacaoSubmit";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Register(iRegisterProps: IRegisterProps) {
+	const [loading, setLoading] = useState(false);
+
 	const {
 		register,
 		control,
@@ -24,6 +27,8 @@ export default function Register(iRegisterProps: IRegisterProps) {
 	});
 
 	async function handleData(data: iPublicacaoForm) {
+		setLoading(true);
+
 		try {
 			const payload: iPublicacaoSubmit = {
 				titulo: data.titulo,
@@ -40,6 +45,8 @@ export default function Register(iRegisterProps: IRegisterProps) {
 			} else {
 				iRegisterProps.onError("Erro ao criar publicação!");
 			}
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -79,8 +86,9 @@ export default function Register(iRegisterProps: IRegisterProps) {
 			<BrButton
 				primary
 				type="submit"
+				disabled={loading}
 			>
-				Publicar
+				{loading ? "Publicando..." : "Publicar"}
 			</BrButton>
 		</form>
 	);
