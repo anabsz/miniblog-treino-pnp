@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import PublicacaoService from "../../services/models/PublicacaoService.tsx";
 import type { iVisualizarPostsProps } from "./interfaces/iVisualizarPublicacaoProps.tsx";
+import { Link } from "react-router";
+import PublicacaoService from "../../services/models/publicacaoService";
 
 export default function VisualizarPosts({
 	publicacoes,
@@ -63,9 +64,10 @@ export default function VisualizarPosts({
 				<p>Nenhum post encontrado.</p>
 			) : (
 				publicacoes.map((post) => (
-					<div
-						className="br-card d-flex flex-col bg-pure-0 p-4  hover:scale-105"
+					<Link
+						className="br-card d-flex flex-col bg-pure-0 p-4  hover:scale-105 hover:cursor-pointer "
 						key={post.id}
+						to={`/publicacao/${post.id}`}
 					>
 						<img
 							className="w-full h-48 object-cover "
@@ -83,7 +85,7 @@ export default function VisualizarPosts({
 						<p className="text-xs! my-1">
 							Data: {formatDate(post.publicado_em)}
 						</p>
-					</div>
+					</Link>
 				))
 			)}
 		</div>
