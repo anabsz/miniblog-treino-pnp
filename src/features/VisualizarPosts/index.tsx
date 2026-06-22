@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import type iPost from "../../interfaces/iPost";
-import postService from "../../services/models/postService";
+import PublicacaoService from "../../services/models/PublicacaoService.tsx";
+import type { iVisualizarPostsProps } from "./interfaces/iVisualizarPublicacaoProps.tsx";
 
-export default function VisualizarPosts() {
-	const [posts, setPosts] = useState<iPost[]>([]);
+export default function VisualizarPosts({
+	publicacoes,
+	setPublicacoes,
+}: iVisualizarPostsProps) {
 	const [loading, setLoading] = useState(true);
 
 	function formatDate(date: string): string {
@@ -19,16 +21,14 @@ export default function VisualizarPosts() {
 	useEffect(() => {
 		async function getPosts() {
 			try {
-				const response = await postService.get();
-				setPosts(response.results);
-			} catch (error) {
-				console.error("Erro ao buscar posts:", error);
+				const response = await PublicacaoService.get();
+				setPublicacoes(response.results);
 			} finally {
 				setLoading(false);
 			}
 		}
 		getPosts();
-	}, []);
+	}, [setPublicacoes]);
 
 	function PostSkeleton() {
 		return (
@@ -59,10 +59,10 @@ export default function VisualizarPosts() {
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4 hover:cursor-pointer ">
-			{posts.length === 0 ? (
+			{publicacoes.length === 0 ? (
 				<p>Nenhum post encontrado.</p>
 			) : (
-				posts.map((post) => (
+				publicacoes.map((post) => (
 					<div
 						className="br-card d-flex flex-col bg-pure-0 p-4  hover:scale-105"
 						key={post.id}

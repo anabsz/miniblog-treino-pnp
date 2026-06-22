@@ -1,6 +1,6 @@
 import type iAutor from "./iAutor";
 
-export default interface iPost {
+export default interface iPublicacao {
 	id: number;
 	titulo: string;
 	descricao: string;
