@@ -1,10 +1,15 @@
-import type iPublicacaoSubmit from "../../interfaces/iPublicacaoSubmit";
-import { useAuthState } from "../../states/useAuthStates";
-import { microblogApi } from "../commom/microblogApi";
+import type iPublicacaoSubmit from "../../../interfaces/iPublicacaoSubmit";
+import { useAuthState } from "../../../states/useAuthStates";
+import { microblogApi } from "../../commom/microblogApi";
 
 export default class PublicacaoService {
 	static async get() {
 		const response = await microblogApi.get("/publicacao/");
+		return response.data;
+	}
+
+	static async getById(id: number) {
+		const response = await microblogApi.get(`/publicacao/${id}/`);
 		return response.data;
 	}
 
