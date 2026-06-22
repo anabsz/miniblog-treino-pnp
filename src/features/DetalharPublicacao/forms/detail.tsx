@@ -8,6 +8,16 @@ export default function Detail() {
 	const [loading, setLoading] = useState(true);
 	const { id } = useParams();
 
+	function formatDate(date: string): string {
+		return new Date(date).toLocaleString("pt-BR", {
+			day: "2-digit",
+			month: "2-digit",
+			year: "numeric",
+			hour: "2-digit",
+			minute: "2-digit",
+		});
+	}
+
 	useEffect(() => {
 		async function fetchPublicacao() {
 			try {
@@ -33,11 +43,22 @@ export default function Detail() {
 	return (
 		<div>
 			{publicacao ? (
-				<div className="d-flex flex-col gap-4 max-w-2xl mx-auto">
-					<h1>{publicacao.titulo}</h1>
-					<small>{publicacao.autor.nome}</small>
+				<div className="d-flex flex-col gap-4 max-w-2xl mx-auto my-4">
+					<h1 className="my-0">{publicacao.titulo}</h1>
+					<div className="flex gap-2 ">
+						<span className="flex gap-1 items-center">
+							<i className="fas fa-user"></i>
+							{publicacao.autor.nome}
+						</span>
+						&bull;
+						<span className="flex gap-1 items-center">
+							<i className="fas fa-calendar-alt"></i>
+							Publicado em: {formatDate(publicacao.publicado_em)}
+						</span>
+					</div>
+
 					<img
-						className="w-full h-72 object-cover"
+						className="w-full h-72 object-cover "
 						src={
 							publicacao?.imagem
 								? publicacao.imagem
@@ -45,7 +66,7 @@ export default function Detail() {
 						}
 						alt={publicacao?.titulo}
 					/>
-					<p>{publicacao.descricao}</p>
+					<p className="text-justify">{publicacao.descricao}</p>
 				</div>
 			) : (
 				<p>Publicação não encontrada.</p>
