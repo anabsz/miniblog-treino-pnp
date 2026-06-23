@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type iPublicacao from "../../../interfaces/iPublicacao";
-import PublicacaoService from "../../../services/models/publicacaoService";
+import PublicacaoService from "../../../services/models/PublicacaoService";
 import { useParams } from "react-router";
 
 export default function Detail() {
@@ -43,7 +43,7 @@ export default function Detail() {
 	return (
 		<div>
 			{publicacao ? (
-				<div className="d-flex flex-col gap-4 max-w-2xl mx-auto my-4">
+				<div className="d-flex flex-col gap-4 mx-auto">
 					<h1 className="my-0">{publicacao.titulo}</h1>
 					<div className="flex gap-2 ">
 						<span className="flex gap-1 items-center">
