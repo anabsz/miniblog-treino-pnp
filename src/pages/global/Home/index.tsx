@@ -1,8 +1,8 @@
-import { BrButton, BrModal } from "@govbr-ds/react-components";
+import { BrButton } from "@govbr-ds/react-components";
 import { useState } from "react";
 import type { Publicacao } from "../../../interfaces/Publicacao";
-import VisualizarPosts from "../../../features/VisualizarPosts";
-import CriarPublicacao from "../../../features/CriarPublicacao";
+import PublicacaoList from "./components/PublicacaoList";
+import PublicacaoFormModal from "./components/PublicacaoFormModal";
 
 export default function HomePage(): React.ReactNode {
 	// -----------------------------
@@ -20,7 +20,6 @@ export default function HomePage(): React.ReactNode {
 	// -----------------------------
 	async function handleSuccess(publicacao: Publicacao) {
 		setPublicacoes((prev) => [publicacao, ...prev]);
-		setShowModalOpen(false);
 	}
 
 	function handleError(message: string) {
@@ -38,7 +37,7 @@ export default function HomePage(): React.ReactNode {
 					Criar Publicação
 				</BrButton>
 
-				<VisualizarPosts
+				<PublicacaoList
 					publicacoes={publicacoes}
 					setPublicacoes={setPublicacoes}
 				/>
@@ -47,18 +46,12 @@ export default function HomePage(): React.ReactNode {
 			{/* Modais */}
 
 			{showModalOpen && (
-				<BrModal
-					width="600px"
-					isOpen={showModalOpen}
-					title="Título do Modal"
-					onClose={() => setShowModalOpen(false)}
-					showClose
-				>
-					<CriarPublicacao
-						onSuccess={handleSuccess}
-						onError={handleError}
-					/>
-				</BrModal>
+				<PublicacaoFormModal
+					onSuccess={handleSuccess}
+					onError={handleError}
+					showModalOpen={showModalOpen}
+					setShowModalOpen={setShowModalOpen}
+				/>
 			)}
 		</>
 	);
