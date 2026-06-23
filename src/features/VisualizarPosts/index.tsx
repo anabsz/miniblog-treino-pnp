@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { iVisualizarPostsProps } from "./interfaces/iVisualizarPublicacaoProps.tsx";
 import { Link } from "react-router";
-import PublicacaoService from "../../services/models/publicacaoService";
+import PublicacaoService from "../../services/models/PublicacaoService/index.tsx";
 
 export default function VisualizarPosts({
 	publicacoes,

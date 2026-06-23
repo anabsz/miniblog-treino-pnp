@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type iPublicacao from "../../../interfaces/iPublicacao";
-import PublicacaoService from "../../../services/models/publicacaoService";
+import PublicacaoService from "../../../services/models/PublicacaoService";
 import { useParams } from "react-router";
 
 export default function Detail() {
