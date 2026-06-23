@@ -1,30 +1,38 @@
 import { useParams } from "react-router";
-import CadastrarComentario from "../features/CadastrarComentario";
-import DetalharPublicacao from "../features/DetalharPublicacao";
-import VisualizarComentarios from "../features/VisualizarComentarios";
 import { useState } from "react";
-import type {
-	iComentario,
-	iComentarioResponse,
-} from "../interfaces/Comentario";
+import ComentarioList from "./components/ComentarioList";
+import type { Comentario } from "../../../interfaces/Comentario";
+import ComentarioForm from "./features/ComentarioForm";
+import PublicacaoDetail from "./components/PublicacaoDetail";
 
 export default function PublicacaoPage() {
-	const [comentarios, setComentarios] = useState<iComentario[]>([]);
+	// -----------------------------
+	// Estados Locais
+	// -----------------------------
+	const [comentarios, setComentarios] = useState<Comentario[]>([]);
 	const { id } = useParams();
 
-	function handleSuccess(data: iComentarioResponse) {
+	// -----------------------------
+	// Funções Auxiliares
+	// -----------------------------
+	function handleSuccess(data: Comentario) {
 		setComentarios((prevComentarios) => [data, ...prevComentarios]);
+	}
+
+	function handleError(error: string) {
+		console.error("Erro ao criar comentário:", error);
 	}
 
 	return (
 		<div className="d-flex flex-col gap-4 max-w-2xl mx-auto my-4">
-			<DetalharPublicacao />
+			<PublicacaoDetail />
 			<h2 className="my-0">Comentários</h2>
-			<CadastrarComentario
+			<ComentarioForm
 				publicacaoId={Number(id)}
 				onSuccess={handleSuccess}
+				onError={handleError}
 			/>
-			<VisualizarComentarios
+			<ComentarioList
 				comentarios={comentarios}
 				setComentarios={setComentarios}
 			/>
