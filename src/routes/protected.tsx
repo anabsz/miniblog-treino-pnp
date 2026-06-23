@@ -1,6 +1,6 @@
-import DetalharPublicacao from "../features/DetalharPublicacao";
 import HomePage from "../pages/Home";
 import Layout from "../pages/layout";
+import PublicacaoPage from "../pages/Publicacao";
 
 export const protectedRoutes = [
 	{
@@ -12,7 +12,7 @@ export const protectedRoutes = [
 			},
 			{
 				path: "/publicacao/:id",
-				element: <DetalharPublicacao />,
+				element: <PublicacaoPage />,
 			},
 		],
 	},
