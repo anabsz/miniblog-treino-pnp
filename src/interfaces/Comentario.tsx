@@ -1,5 +1,8 @@
 import type Autor from "./Autor";
 
+// -----------------------------
+// Interfaces de Modelo
+// -----------------------------
 export interface Comentario {
 	id: number;
 	mensagem: string;
@@ -8,6 +11,9 @@ export interface Comentario {
 	publicado_em: string;
 }
 
+// -----------------------------
+// Interfaces de Submissão
+// -----------------------------
 export interface ComentarioSubmit {
 	publicacao: number;
 	mensagem: string;

@@ -1,5 +1,8 @@
 import type Autor from "./Autor";
 
+// -----------------------------
+// Interfaces de Modelo
+// -----------------------------
 export interface Publicacao {
 	id: number;
 	titulo: string;
@@ -9,6 +12,9 @@ export interface Publicacao {
 	publicado_em: string;
 }
 
+// -----------------------------
+// Interfaces de Submissão
+// -----------------------------
 export interface PublicacaoSubmit {
 	titulo: string;
 	descricao: string;
