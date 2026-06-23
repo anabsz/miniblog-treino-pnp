@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./schema";
 import type { iPublicacaoForm } from "../interfaces/iPublicacaoForm";
-import publicacaoService from "../../../services/models/PublicacaoService";
+import publicacaoService from "../../../services/models/publicacaoService";
 import type { IRegisterProps } from "../interfaces/iRegisterProps";
 import type iPublicacaoSubmit from "../../../interfaces/iPublicacaoSubmit";
 import axios from "axios";

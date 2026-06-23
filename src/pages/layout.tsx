@@ -23,6 +23,10 @@ export default function Layout() {
 		navigate("/login");
 	}
 
+	function redirectToHome() {
+		navigate("/");
+	}
+
 	function userAvatar() {
 		return (
 			<BrButton
@@ -64,11 +68,7 @@ export default function Layout() {
 				quickAccessLinks={[
 					{
 						label: "Inicio",
-						onClick: function Dc() {},
-					},
-					{
-						label: "Posts",
-						onClick: function Dc() {},
+						onClick: redirectToHome,
 					},
 				]}
 				loggedIn={isLogged()}
