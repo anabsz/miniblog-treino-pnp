@@ -5,7 +5,10 @@ import type { Comentario } from "../../../../../interfaces/Comentario";
 import { formatShortDate } from "../../../../utils";
 import PublicacaoService from "../../../../../services/models/PublicacaoService";
 
-export default function ComentarioList(props: ComentarioListProps) {
+export default function ComentarioList({
+	comentarios,
+	setComentarios,
+}: ComentarioListProps) {
 	// -----------------------------
 	// Estados Locais
 	// -----------------------------
@@ -18,20 +21,20 @@ export default function ComentarioList(props: ComentarioListProps) {
 		async function fetchComentarios() {
 			try {
 				const response = await PublicacaoService.getComentarios(Number(id));
-				props.setComentarios(response.results);
+				setComentarios(response.results);
 			} catch (error) {
 				console.error("Erro ao buscar comentários:", error);
 			}
 		}
 
 		fetchComentarios();
-	}, [props, id]);
+	}, [setComentarios, id]);
 
 	return (
 		<div>
-			{props.comentarios.length > 0 ? (
+			{comentarios.length > 0 ? (
 				<ul className="list-none d-flex flex-col gap-4 p-0">
-					{props.comentarios.map((comentario: Comentario) => (
+					{comentarios.map((comentario: Comentario) => (
 						<li
 							key={comentario.id}
 							className=" p-2 shadow-md"
