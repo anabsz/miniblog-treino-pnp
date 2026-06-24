@@ -20,6 +20,7 @@ export default function HomePage(): React.ReactNode {
 	// -----------------------------
 	async function handleSuccess(publicacao: Publicacao) {
 		setPublicacoes((prev) => [publicacao, ...prev]);
+		setShowModalOpen(false);
 	}
 
 	function handleError(message: string) {

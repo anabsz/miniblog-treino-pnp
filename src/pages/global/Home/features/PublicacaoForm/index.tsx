@@ -84,11 +84,12 @@ export default function PublicacaoForm(
 				control={control}
 				render={({ field }) => (
 					<BrUpload
+						helpText={errors.imagem?.message}
 						label="Imagem"
 						maxFiles={1}
 						accept=".jpg,.jpeg,.png"
 						maxFileSize={5 * 1024 * 1024}
-						onChange={(files) => field.onChange(files)}
+						onChange={(files) => field.onChange(files[0])}
 					/>
 				)}
 			/>

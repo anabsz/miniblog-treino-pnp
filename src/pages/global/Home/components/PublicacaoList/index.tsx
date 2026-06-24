@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import PublicacaoListSkeleton from "../PublicacaoListSkeleton/index.tsx";
 import type { PublicacaoListProps } from "./interfaces.ts";
-import PublicacaoService from "../../../../../services/models/PublicacaoService/index.tsx";
 import { formatLongDate } from "../../../../utils.ts";
+import PublicacaoService from "../../../../../services/models/PublicacaoService/";
 
 export default function PublicacaoList({
 	publicacoes,
