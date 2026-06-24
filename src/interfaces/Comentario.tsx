@@ -1,4 +1,4 @@
-import type Autor from "./Autor";
+import type Usuario from "./Usuario";
 
 // -----------------------------
 // Interfaces de Modelo
@@ -6,7 +6,7 @@ import type Autor from "./Autor";
 export interface Comentario {
 	id: number;
 	mensagem: string;
-	autor: Autor;
+	autor: Usuario;
 	publicacao: number;
 	publicado_em: string;
 }
