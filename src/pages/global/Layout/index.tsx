@@ -22,20 +22,24 @@ export default function Layout(): React.ReactNode {
 
 	return (
 		<div>
-			<nav className="br-header flex justify-between align-center">
-				<Link to="/">
-					<img
-						src="https://www.gov.br/ds/assets/img/govbr-logo.png"
-						alt="Logo do Governo Federal"
-					/>
-				</Link>
-				(
-				{isLogged() ? (
-					<UserAvatar onClick={logout} />
-				) : (
-					<Link to="/login">Entrar</Link>
-				)}
-				)
+			<nav className="br-header ">
+				<div className="container md:flex block justify-between align-center">
+					<Link
+						to="/"
+						className="flex justify-center align-center gap-2 "
+					>
+						<img
+							src="https://www.gov.br/ds/assets/img/govbr-logo.png"
+							alt="Logo do Governo Federal"
+						/>
+						<h1 className="m-0">Meu Belo Miniblog</h1>
+					</Link>
+					{isLogged() ? (
+						<UserAvatar onClick={logout} />
+					) : (
+						<Link to="/login">Entrar</Link>
+					)}
+				</div>
 			</nav>
 			<main className="container">
 				<Outlet />
