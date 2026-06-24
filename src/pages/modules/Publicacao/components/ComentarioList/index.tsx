@@ -5,6 +5,32 @@ import type { Comentario } from "../../../../../interfaces/Comentario";
 import { formatShortDate } from "../../../../utils";
 import PublicacaoService from "../../../../../services/models/PublicacaoService";
 
+/**
+ * Lista os comentários de uma publicação específica.
+ *
+ * @param {UserAvatarProps} props
+ * Lista de comentários e função para atualizar a lista.
+ *
+ * @param {Comentario[]} [props.comentarios]
+ * Lista de comentários exibidos.
+ *
+ *  @param {Function} props.setComentarios
+ * Função responsável por atualizar a lista de comentários.
+ *
+ * @returns {React.ReactNode}
+ * Lista de comentários renderizada em formato de cards.
+ *
+ * @example
+ * ```tsx
+ * <ComentarioList
+ *   comentarios={comentarios}
+ *   setComentarios={setComentarios}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function ComentarioList({
 	comentarios,
 	setComentarios,

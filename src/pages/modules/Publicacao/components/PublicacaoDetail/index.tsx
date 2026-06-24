@@ -4,6 +4,22 @@ import type { Publicacao } from "../../../../../interfaces/Publicacao";
 import PublicacaoService from "../../../../../services/models/PublicacaoService";
 import { formatLongDate } from "../../../../utils";
 
+/**
+ * Componente responsável por exibir os detalhes de uma publicação específica.
+ *
+ * @returns {React.ReactNode}
+ * Componente de detalhes da publicação, incluindo título, autor, data de publicação, imagem e descrição.
+ *
+ * @example
+ * ```tsx
+ * import { PublicacaoDetail } from "@/PublicacaoDetail";
+ *
+ * <PublicacaoDetail />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function PublicacaoDetail() {
 	// -----------------------------
 	// Estados Locais

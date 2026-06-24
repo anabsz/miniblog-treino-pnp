@@ -1,10 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import PublicacaoListSkeleton from "../PublicacaoListSkeleton/index.tsx";
 import type { PublicacaoListProps } from "./interfaces.ts";
 import { formatLongDate } from "../../../../utils.ts";
 import PublicacaoService from "../../../../../services/models/PublicacaoService/";
+import { BrSkeleton } from "@govbr-ds/react-components";
 
+/**
+ * Lista as publicações cadastradas no sistema.
+ *
+ * @param {PublicacaoListProps} props Lista de publicações e função para atualizar a lista.
+ *
+ * @param {Publicacao[]} props.publicacoes
+ * Lista de publicações exibidas.
+ *
+ * @param {Function} props.setPublicacoes
+ * Função responsável por atualizar a lista de publicações.
+ *
+ * @returns {React.ReactNode}
+ * Lista de publicações renderizada em formato de cards.
+ *
+ * @example
+ * ```tsx
+ * const [publicacoes, setPublicacoes] = useState<Publicacao[]>([]);
+ *
+ * <PublicacaoList
+ *   publicacoes={publicacoes}
+ *   setPublicacoes={setPublicacoes}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function PublicacaoList({
 	publicacoes,
 	setPublicacoes,
@@ -36,7 +63,11 @@ export default function PublicacaoList({
 		return (
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{Array.from({ length: 6 }).map((_, index) => (
-					<PublicacaoListSkeleton key={index} />
+					<BrSkeleton
+						key={index}
+						width={350}
+						height={250}
+					/>
 				))}
 			</div>
 		);

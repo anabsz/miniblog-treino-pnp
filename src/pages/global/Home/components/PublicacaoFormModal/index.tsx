@@ -5,6 +5,49 @@ import type { Publicacao } from "../../../../../interfaces/Publicacao";
 import PublicacaoForm from "../../features/PublicacaoForm";
 import type { PublicacaoFormModalProps } from "./interfaces";
 
+/**
+ * Modal responsável pelo cadastro de uma nova publicação.
+ *
+ *  @param {PublicacaoFormModalProps} props Propriedades de sucesso, erro e estado do modal.
+ *
+ * @param {boolean} props.showModalOpen Estado do modal (aberto ou fechado).
+ *
+ * @param {Function} props.setShowModalOpen Função para alterar o estado do modal.
+ *
+ * @param {{response: Publicacao}} props.onSuccess
+ * Função a ser chamada quando a publicação for criada com sucesso.
+ *
+ * @param {{message: string}} props.onError
+ * Função a ser chamada quando ocorrer um erro ao criar a publicação.
+ *
+ * @returns {React.ReactNode}
+ * Modal de cadastro de publicação.
+ *
+ * @example
+ * ```ts
+ * import { PublicacaoFormModal } from "@/PublicacaoFormModal";
+ *
+ * const [showModalOpen, setShowModalOpen] = useState(false);
+ *
+ * function handleSuccess(response: Publicacao) {
+ *   console.log("Publicação criada com sucesso:", response);
+ * }
+ *
+ * function handleError(message: string) {
+ *  console.error("Erro ao criar publicação:", message);
+ * }
+
+ * <PublicacaoFormModal
+ *  showModalOpen={showModalOpen}
+ *  setShowModalOpen={setShowModalOpen}
+ *  onSuccess={handleSuccess}
+ *  onError={handleError}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function PublicacaoFormModal(
 	props: PublicacaoFormModalProps
 ): React.ReactNode {

@@ -12,7 +12,34 @@ import type { PublicacaoSubmit } from "../../../../../interfaces/Publicacao";
 import type { PublicacaoFormProps } from "../../interfaces";
 import { publicacaoSchema } from "./schema";
 import PublicacaoService from "../../../../../services/models/PublicacaoService";
-
+/**
+ * Formulário responsável pelo cadastro de publicações.
+ *
+ * @param {PublicacaoFormProps} props
+ * @param {(response: Publicacao) => void} props.onSuccess
+ * Função executada após o cadastro bem-sucedido da publicação.
+ *
+ * @param {(message: string) => void} props.onError
+ * Função executada quando ocorre algum erro durante o cadastro.
+ *
+ * @returns {React.ReactNode}
+ * Formulário de criação de publicação.
+ *
+ * @example
+ * ```tsx
+ * <PublicacaoForm
+ *   onSuccess={(publicacao) => {
+ *     setPublicacoes((prev) => [publicacao, ...prev]);
+ *   }}
+ *   onError={(message) => {
+ *     console.error(message);
+ *   }}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function PublicacaoForm(
 	props: PublicacaoFormProps
 ): React.ReactNode {

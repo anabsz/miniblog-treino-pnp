@@ -8,7 +8,36 @@ import { loginSchema } from "./schema";
 import { loginService } from "./services";
 import { useAuthStore } from "../../../../../stores/useAuthStore";
 import type { Token } from "../../../../../interfaces/Usuario";
-
+/**
+ * Formulário responsável pela autenticação de usuários.
+ *
+ * @param {LoginFormProps} props Funlções de sucesso e erro para o login.
+ *
+ * @param {(message: string) => void} props.onSuccess
+ * Função executada quando o login é realizado com sucesso.
+ *
+ * @param {(message: string) => void} props.onError
+ * Função executada quando ocorre falha durante a autenticação.
+ *
+ * @returns {React.ReactNode}
+ * Formulário de login contendo campos de usuário e senha.
+ *
+ * @example
+ * ```tsx
+ * <LoginForm
+ *   onSuccess={(message) => {
+ *     console.log(message);
+ *     navigate("/");
+ *   }}
+ *   onError={(message) => {
+ *     console.error(message);
+ *   }}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function LoginForm(props: LoginFormProps): React.ReactNode {
 	// -----------------------------
 	// Estados Locais
@@ -30,7 +59,7 @@ export default function LoginForm(props: LoginFormProps): React.ReactNode {
 	// -----------------------------
 	// Funções Auxiliares
 	// -----------------------------
-	function togglePassword() {
+	function togglePassword(): void {
 		setShowPassword((prev) => !prev);
 	}
 

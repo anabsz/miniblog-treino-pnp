@@ -8,6 +8,38 @@ import type { ComentarioSubmit } from "../../../../../interfaces/Comentario";
 import { comentarioSchema } from "./schema";
 import ComentarioService from "../../../../../services/models/ComentarioService";
 
+/**
+ * Componente responsável por exibir o formulário para adicionar comentários.
+ *
+ * @param {ComentarioFormProps} props
+ * ID da Publicação e funções de sucesso e erro.
+ *
+ * @param {number} props.publicacaoId
+ * ID da publicação à qual o comentário pertence.
+ *
+ * @param {() => void} props.onSuccess
+ * Função executada em caso de sucesso ao enviar o comentário.
+ *
+ * @param {() => void} props.onError
+ * Função executada em caso de erro ao enviar o comentário.
+ *
+ * @returns {React.ReactNode}
+ * Formulário para adicionar comentários.
+ *
+ * @example
+ * ```tsx
+ * import { ComentarioForm } from "@/ComentarioForm";
+ *
+ * <ComentarioForm
+ *   publicacaoId={1}
+ *   onSuccess={() => console.log("Comentário enviado com sucesso!")}
+ *   onError={() => console.error("Erro ao enviar comentário")}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function ComentarioForm(props: ComentarioFormProps) {
 	// -----------------------------
 	// Estados Locais

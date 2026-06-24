@@ -8,6 +8,32 @@ import { cadastroService } from "./services";
 import { usuarioSchema } from "./schema";
 import type { UsuarioSubmit } from "../../../../../interfaces/Usuario";
 
+/**
+ * Componente responsável por exibir o avatar do usuário autenticado.
+ *
+ * @param {UsuarioCadastroFormProps} props
+ * Propriedades com função de sucesso.
+ *
+ * @param {Function} props.onSuccess
+ * Função executada quando o cadastro do usuário é realizado com sucesso.
+ *
+ * @returns {React.ReactNode}
+ * Formulário de cadastro de usuário.
+ *
+ * @example
+ * ```tsx
+ * import { UsuarioCadastroForm } from "@/UsuarioCadastroForm";
+ *
+ * <UsuarioCadastroForm
+ *   onSuccess={(usuario) => {
+ *     console.log("Usuário cadastrado com sucesso:", usuario);
+ *   }}
+ * />
+ * ```
+ *
+ * @author
+ *   @anabsz
+ */
 export default function UsuarioCadastroForm(
 	props: UsuarioCadastroFormProps
 ): React.ReactNode {
