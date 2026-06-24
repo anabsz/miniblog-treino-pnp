@@ -1,6 +1,7 @@
 import type { PublicacaoSubmit } from "../../../interfaces/Publicacao";
 import { useAuthStore } from "../../../stores/useAuthStore";
 import { axiosInstance } from "../../commom/axiosInstance";
+import { getAuthHeaders } from "../../commom/headers";
 
 export default class PublicacaoService {
 	static async get() {
@@ -14,12 +15,8 @@ export default class PublicacaoService {
 	}
 
 	static async post(data: PublicacaoSubmit) {
-		console.log(useAuthStore.getState());
 		const response = await axiosInstance.post("/publicacao/", data, {
-			headers: {
-				Authorization: `Bearer ${useAuthStore.getState().accessToken}`,
-				"Content-Type": "multipart/form-data",
-			},
+			headers: getAuthHeaders(useAuthStore.getState().accessToken),
 		});
 		return response.data;
 	}
