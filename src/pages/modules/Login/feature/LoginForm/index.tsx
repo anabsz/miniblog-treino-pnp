@@ -82,12 +82,17 @@ export default function LoginForm(props: LoginFormProps): React.ReactNode {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(handleData)}>
+		<form
+			onSubmit={handleSubmit(handleData)}
+			className="flex flex-col gap-4"
+		>
 			<BrInput
 				label="Nome de Usuário"
 				{...register("username")}
 				status={errors.username ? "danger" : undefined}
 				feedbackText={errors.username?.message}
+				icon="fa-solid fa-user"
+				placeholder="Digite seu nome de usuário"
 			/>
 			<BrInput
 				label="Senha"
@@ -95,6 +100,8 @@ export default function LoginForm(props: LoginFormProps): React.ReactNode {
 				{...register("password")}
 				status={errors.password ? "danger" : undefined}
 				feedbackText={errors.password?.message}
+				icon="fa-solid fa-lock"
+				placeholder="Digite sua senha"
 			>
 				<BrButton
 					icon={showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}

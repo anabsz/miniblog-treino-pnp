@@ -104,12 +104,16 @@ export default function UsuarioCadastroForm(
 				{...register("username")}
 				status={errors.username ? "danger" : undefined}
 				feedbackText={errors.username?.message}
+				icon="fa-solid fa-user"
+				placeholder="Digite seu nome de usuário"
 			/>
 			<BrInput
 				label="Nome"
 				{...register("nome")}
 				status={errors.nome ? "danger" : undefined}
 				feedbackText={errors.nome?.message}
+				icon="fa-solid fa-id-card"
+				placeholder="Digite seu nome"
 			/>
 			<BrInput
 				label="Senha"
@@ -117,6 +121,8 @@ export default function UsuarioCadastroForm(
 				{...register("senha")}
 				status={errors.senha ? "danger" : undefined}
 				feedbackText={errors.senha?.message}
+				icon="fa-solid fa-lock"
+				placeholder="Digite sua senha"
 			>
 				<BrButton
 					icon={showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}
@@ -129,6 +135,8 @@ export default function UsuarioCadastroForm(
 				{...register("senhaConfirm")}
 				status={errors.senhaConfirm ? "danger" : undefined}
 				feedbackText={errors.senhaConfirm?.message}
+				icon="fa-solid fa-lock"
+				placeholder="Confirme sua senha"
 			>
 				<BrButton
 					icon={
