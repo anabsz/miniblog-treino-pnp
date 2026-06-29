@@ -1,6 +1,6 @@
-import HomePage from "../pages/Home";
-import Layout from "../pages/layout";
-import PublicacaoPage from "../pages/Publicacao";
+import HomePage from "../pages/global/Home";
+import Layout from "../pages/global/Layout";
+import PublicacaoPage from "../pages/modules/Publicacao";
 
 export const protectedRoutes = [
 	{
