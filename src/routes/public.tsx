@@ -1,10 +1,10 @@
-import AutocadastroPage from "../features/Autocadastro";
-import LoginPage from "../features/Login";
+import LoginPage from "../pages/modules/Login";
+import UsuarioCadastroPage from "../pages/modules/UsuarioCadastro";
 
 export const publicRoutes = [
 	{
 		path: "cadastro",
-		element: <AutocadastroPage />,
+		element: <UsuarioCadastroPage />,
 	},
 	{
 		path: "login",
